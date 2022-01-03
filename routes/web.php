@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CtrlMenu;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('dashboard');
 });
-Route::get('/menu', function () {
-    return view('data_menu');
-});
+
+// Menu
+Route::get('/menu',[CtrlMenu::class,'index']);
+Route::get('/menu/form/{id?}',[CtrlMenu::class,'form']);
+Route::post('/menu/save',[CtrlMenu::class,'save']);
+Route::get('/menu/delete/{id}',[CtrlMenu::class,'delete']);
