@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CtrlMenu;
+use App\Http\Controllers\MemberCtrl;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,8 @@ Route::get('/menu',[CtrlMenu::class,'index']);
 Route::get('/menu/form/{id?}',[CtrlMenu::class,'form']);
 Route::post('/menu/save',[CtrlMenu::class,'save']);
 Route::get('/menu/delete/{id}',[CtrlMenu::class,'delete']);
+
+// Menu
+Route::get('/member',[MemberCtrl::class,'index']);
+
+
