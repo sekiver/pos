@@ -10,6 +10,10 @@ class Member extends Model
     use HasFactory;
 
     protected $table = "tb_member";
+    protected $primaryKey = "id_member";
+    protected $keyType = "string";
+    public $incrementing = false;    
+    protected $guarded = ['id_member'];    
 }
 
 
