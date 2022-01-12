@@ -20,34 +20,72 @@ class MemberCtrl extends Controller
     }
 
     function form(Request $req){
-        $mode = $req->id!="" ? "Edit" : "Add New";
+        $mode = $req->id!="" ? "Edit" : "Add New";        
         // Data Page
         $data = [
             "title" => $mode." Member",
             "page_title" => $mode." Member",
-        // "members" => Member::All()
+            "rsMember" => Member::where("id_member",$req->id)->first()
         ];
 
         return view("member.frm_member",$data);
     }
 
     function save(Request $req){
+        // Validation
+        $req->validate(
+            // Rule
+            [
+                "kd_member" => "required|size:6|unique:tb_member,kd_member,".$req->input("id_member").",id_member",
+                "nm_member" => "required",
+                "alamat" =>"required",
+                "kota" => "required",
+                "telp" => "required|numeric|digits_between:11,13|unique:tb_member,telp,".$req->input("id_member").",id_member",
+                "jk" => "required",
+                "status" => "required",
+            ],
+            // Message Error
+            [
+                "kd_member.required" => "Kode Member Wajib diisi !!",
+                "kd_member.size" => "Kode Member Harus 6 Karakter !!",
+                "kd_member.unique" => "Kode Member Sudah digunakan",
+                "nm_member.required" => "Nama Member Wajib diisi !!",
+                "kota.required" => "Kota Wajib diisi !!",
+                "telp.required" => "Telepon Wajib diisi !!",
+                "telp.numeric" => "Telepon Harus diisi dengan angka !!",
+                "telp.digits_between" => "Telepon antara 11 - 13 digits !!",
+                "telp.unique" => "Telepon sudah digunakan !!",
+                "jk.required" => "Jenis Kelamin Wajib diisi !!",
+                "status.required" => "Status Wajib diisi !!",
+            ]
+        );
 
         // Proses Save
-        Member::Create([
-            "kd_member"=>$req->input("kd_member"),
-            "nm_member"=>$req->input("nm_member"),
-            "alamat"=>$req->input("alamat"),
-            "kota"=>$req->input("kota"),
-            "telp"=>$req->input("telp"),
-            "jk"=>$req->input("jk"),
-            "status"=>$req->input("status"),
-            "foto"=>"",
-        ]);
+        Member::UpdateorCreate(
+            [
+                "id_member" => $req->input("id_member")
+            ],
+            [
+                "kd_member"=>$req->input("kd_member"),
+                "nm_member"=>$req->input("nm_member"),
+                "alamat"=>$req->input("alamat"),
+                "kota"=>$req->input("kota"),
+                "telp"=>$req->input("telp"),
+                "jk"=>$req->input("jk"),
+                "status"=>$req->input("status"),
+                "foto"=>$req->input("foto"),
+            ]
+        );
 
         // Redirect
         return redirect('member');
     } 
+
+    function delete(Request $req){
+        Member::where("id_member",$req->id)->delete();
+        // Redirect
+        return redirect('member');
+    }
 }
 
 

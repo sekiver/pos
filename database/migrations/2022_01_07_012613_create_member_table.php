@@ -21,7 +21,7 @@ class CreateMemberTable extends Migration
             $table->string('kota', 50);
             $table->string('telp', 15)->unique();
             $table->integer('jk');
-            $table->string('foto',50);
+            $table->text('foto');
             $table->integer('status');
             $table->timestamps();
         });

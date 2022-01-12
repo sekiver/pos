@@ -29,5 +29,6 @@ Route::get('/menu/delete/{id}',[CtrlMenu::class,'delete']);
 Route::get('/member',[MemberCtrl::class,'index']);
 Route::get('/member/form/{id?}',[MemberCtrl::class,'form']);
 Route::post('/member/save',[MemberCtrl::class,'save']);
+Route::get('/member/delete/{id}',[MemberCtrl::class,'delete']);
 
 
