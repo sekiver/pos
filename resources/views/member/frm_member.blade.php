@@ -4,6 +4,13 @@
 @section("page_title",$page_title)
 
 @section('content')
+    <script>
+        $(function(){
+            @if($errors->any())
+            showMessage("error", "Terjadi Kesalahan !");
+            @endif
+        });
+    </script>
     <form action="{{ url('member/save') }}" method="post">
         @csrf {{-- Token Keamanan --}}
         <div class="row">

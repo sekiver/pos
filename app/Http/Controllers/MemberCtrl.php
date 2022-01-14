@@ -60,31 +60,43 @@ class MemberCtrl extends Controller
             ]
         );
 
-        // Proses Save
-        Member::UpdateorCreate(
-            [
-                "id_member" => $req->input("id_member")
-            ],
-            [
-                "kd_member"=>$req->input("kd_member"),
-                "nm_member"=>$req->input("nm_member"),
-                "alamat"=>$req->input("alamat"),
-                "kota"=>$req->input("kota"),
-                "telp"=>$req->input("telp"),
-                "jk"=>$req->input("jk"),
-                "status"=>$req->input("status"),
-                "foto"=>$req->input("foto"),
-            ]
-        );
+        try {
+            // Proses Save
+            Member::UpdateorCreate(
+                [
+                    "id_member" => $req->input("id_member")
+                ],
+                [
+                    "kd_member"=>$req->input("kd_member"),
+                    "nm_member"=>$req->input("nm_member"),
+                    "alamat"=>$req->input("alamat"),
+                    "kota"=>$req->input("kota"),
+                    "telp"=>$req->input("telp"),
+                    "jk"=>$req->input("jk"),
+                    "status"=>$req->input("status"),
+                    "foto"=>$req->input("foto"),
+                ]
+            );
+
+            // Data yang dibwa saat berhasil
+            $mess = ["type"=>"success","text"=>"Data Berhasil disimpan !!"];
+        } catch(Exception $err){
+            $mess = ["type"=>"error","text"=>"Data Gagal disimpan !!"];
+        }
 
         // Redirect
-        return redirect('member');
+        return redirect('member')->with($mess);
     } 
 
     function delete(Request $req){
-        Member::where("id_member",$req->id)->delete();
+        try {
+            Member::where("id_member",$req->id)->delete();
+            $mess = ["type"=>"success","text"=>"Data Berhasil dihapus !!"];
+        } catch(Exception $err){
+            $mess = ["type"=>"error","text"=>"Data Gagal dihapus !!"];
+        }
         // Redirect
-        return redirect('member');
+        return redirect('member')->with($mess);
     }
 }
 

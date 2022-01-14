@@ -4,6 +4,13 @@
 @section("page_title",$page_title)
 
 @section('content')
+<script>
+    $(function(){
+        @if(session("type"))
+            showMessage('{{ session("type") }}','{{ session("text") }}');
+        @endif
+    });
+</script>
 <div class="card">
     <div class="card-header">
       <div class="card-title">

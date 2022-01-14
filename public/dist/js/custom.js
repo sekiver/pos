@@ -39,3 +39,21 @@ function setImage(input, target) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+// Alert Toast
+function showMessage(type, mess) {
+    switch (type) {
+        case "success":
+            toastr.success(mess);
+            break;
+        case "info":
+            toastr.info(mess);
+            break;
+        case "error":
+            toastr.error(mess);
+            break;
+        case "warning":
+            toastr.warning(mess);
+            break;
+    }
+}

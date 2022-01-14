@@ -36,38 +36,87 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+          <li class="nav-header">DATA MASTER</li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
               <p>
-                Starter Pages
+                Members
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="{{ url('member') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
+                  <p>Data Member</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ url('member/form') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
+                  <p>Add New</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-utensils"></i>
               <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
+                Menu
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('menu') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Menu</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('menu/form') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add New</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-header">TRANSAKSI</li>    
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-shopping-cart"></i>
+              <p>
+                Transaksi               
               </p>
             </a>
           </li>
+          <li class="nav-header">SETTINGS</li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Users
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('user') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data User</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('user/form') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add New</p>
+                </a>
+              </li>
+            </ul>
+          </li>  
+          <li class="nav-header">REPORTS</li>        
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
