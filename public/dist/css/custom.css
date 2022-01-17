@@ -7,3 +7,13 @@
     object-position: center top;
     -o-object-position: center top;
 }
+
+img.avatar {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    -o-object-fit: cover;
+    object-position: center top;
+    -o-object-position: center top;
+    border: 1px solid rgb(71, 71, 71);
+}

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CtrlMenu;
 use App\Http\Controllers\MemberCtrl;
+use App\Http\Controllers\UserCtrl;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +26,16 @@ Route::get('/menu/form/{id?}',[CtrlMenu::class,'form']);
 Route::post('/menu/save',[CtrlMenu::class,'save']);
 Route::get('/menu/delete/{id}',[CtrlMenu::class,'delete']);
 
-// Menu
+// Member
 Route::get('/member',[MemberCtrl::class,'index']);
 Route::get('/member/form/{id?}',[MemberCtrl::class,'form']);
 Route::post('/member/save',[MemberCtrl::class,'save']);
 Route::get('/member/delete/{id}',[MemberCtrl::class,'delete']);
+
+// User
+Route::get('/user',[UserCtrl::class,'index']);
+Route::get('/user/form/{id?}',[UserCtrl::class,'form']);
+Route::post('/user/save',[UserCtrl::class,'save']);
+Route::get('/user/delete/{id}',[UserCtrl::class,'delete']);
 
 
