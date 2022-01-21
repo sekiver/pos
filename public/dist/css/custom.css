@@ -17,3 +17,40 @@ img.avatar {
     -o-object-position: center top;
     border: 1px solid rgb(71, 71, 71);
 }
+
+/* Transaksi */
+#transaksi { background-color: #fff; }
+#transaksi .menu .row { margin: 0; }
+#transaksi .menu .menu-list { max-height: 90vh; overflow-y: scroll; }
+#transaksi .menu .menu-item { position: relative; margin-bottom: 15px; padding: 0 5px; }
+#transaksi .menu .menu-item .inner { position: relative; border: 1px solid #343a40; }
+#transaksi .menu .menu-item img { position: relative; width: 100%; height: 200px; object-fit: cover; object-position: center;}
+#transaksi .menu .menu-item h2 { position: absolute; bottom: 0; width: 100%; padding: 5px; background: rgba(255,255,255,0.9); color: #343a40; font-size: 18px; margin: 0;  }
+
+#transaksi .menu .menu-navigation { position: relative; padding: 10px; margin-bottom: 10px; background: #343a40; }
+#transaksi .menu .menu-navigation .row { margin: 0; }
+#transaksi .menu .menu-navigation .cashier,.menu .menu-navigation .search { display: flex; padding: 0; flex-direction: column; justify-content: center; }
+#transaksi .menu .menu-navigation .cashier h5 { color: #fff; margin: 0;  }
+
+#transaksi .transaksi .info .row { margin: 0; }
+#transaksi .transaksi .info .info-item { padding: 0; }
+#transaksi .transaksi .info .info-item a { text-transform: uppercase; }
+#transaksi .transaksi .info .info-item a i { display: inline-block; margin-right: 5px; }
+#transaksi .transaksi .info h3 { background-color: #33363a; color: #fff; font-size: 22px; text-transform: uppercase; padding: 5px; text-align: center; }
+
+#transaksi .transaksi .detail { position: relative; min-height: 60vh; overflow-y: scroll; }
+#transaksi .transaksi .detail .row { margin: 0; }
+#transaksi .transaksi .detail .detail-item { position: relative; padding: 0 5px; margin: 5px 0; }
+#transaksi .transaksi .detail .detail-item h4 { position: relative; margin: 0; font-size: 18px;  }
+#transaksi .transaksi .detail .detail-item .price h4 { position: relative; text-align: right; font-size: 16px; }
+#transaksi .transaksi .detail .detail-item .price h4 span { position: absolute; left: 0; top: 0; height: 100%; }
+#transaksi .transaksi .detail .detail-item input[type="number"] { display: inline-block; width: 50px; border: 0; margin-left: 2px;  }
+#transaksi .transaksi .detail .detail-item input[type="number"]:focus { outline: none; }
+#transaksi .transaksi .charge .other { position: relative; padding: 5px; border-top: 2px solid #343a40; }
+#transaksi .transaksi .charge .other p { position: relative; margin: 0; }
+#transaksi .transaksi .charge .other .price { position: relative; text-align: right; }
+
+#transaksi .transaksi .charge .nav { position: relative; padding: 5px 0; }
+#transaksi .transaksi .charge .nav .row { margin: 0;  }
+#transaksi .transaksi .charge .nav .nav-item { padding: 0;  }
+#transaksi .transaksi .charge #amount { position: relative; padding: 5px; margin: 5px 0 0 0;  background: #343a40;  color: #fff; text-align: center; }

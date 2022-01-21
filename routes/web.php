@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuCtrl;
 use App\Http\Controllers\MemberCtrl;
 use App\Http\Controllers\UserCtrl;
+use App\Http\Controllers\TransaksiCtrl;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +38,11 @@ Route::get('/user',[UserCtrl::class,'index']);
 Route::get('/user/form/{id?}',[UserCtrl::class,'form']);
 Route::post('/user/save',[UserCtrl::class,'save']);
 Route::get('/user/delete/{id}',[UserCtrl::class,'delete']);
+
+// Transaksi
+Route::get('/transaksi',[TransaksiCtrl::class,'index']);
+Route::get('/transaksi/form',[TransaksiCtrl::class,'form']);
+Route::post('/transaksi/save',[TransaksiCtrl::class,'save']);
+Route::get('/transaksi/delete/{id}',[TransaksiCtrl::class,'delete']);
 
 
