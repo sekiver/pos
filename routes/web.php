@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CtrlMenu;
+use App\Http\Controllers\MenuCtrl;
 use App\Http\Controllers\MemberCtrl;
 use App\Http\Controllers\UserCtrl;
 
@@ -21,10 +21,10 @@ Route::get('/', function () {
 });
 
 // Menu
-Route::get('/menu',[CtrlMenu::class,'index']);
-Route::get('/menu/form/{id?}',[CtrlMenu::class,'form']);
-Route::post('/menu/save',[CtrlMenu::class,'save']);
-Route::get('/menu/delete/{id}',[CtrlMenu::class,'delete']);
+Route::get('/menu',[MenuCtrl::class,'index']);
+Route::get('/menu/form/{id?}',[MenuCtrl::class,'form']);
+Route::post('/menu/save',[MenuCtrl::class,'save']);
+Route::get('/menu/delete/{id}',[MenuCtrl::class,'delete']);
 
 // Member
 Route::get('/member',[MemberCtrl::class,'index']);
