@@ -82,3 +82,21 @@ function closeFullscreen() {
         document.msExitFullscreen();
     }
 }
+
+// Pilih Member
+function pilih_member(id_member, nama) {
+    $("#nm_member").html(nama);
+    $("#id_member").val(id_member);
+
+    // Menyembunyikan Modal Member
+    $("#modal-member").modal("hide");
+}
+
+// Pilih Meja
+function pilih_meja(id_member, nama) {
+    $("#meja").html(nama);
+    $("#id_meja").val(id_member);
+
+    // Menyembunyikan Modal Member
+    $("#modal-meja").modal("hide");
+}

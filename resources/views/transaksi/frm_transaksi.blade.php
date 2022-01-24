@@ -1,5 +1,8 @@
 @extends('layouts.template')
 
+@section("title",$title)
+@section("page_title",$page_title)
+
 @section('content')
     <div id="transaksi">
         <div class="row">
@@ -38,17 +41,22 @@
                 {{-- End List Menu --}}
             </div>
             <div class="transaksi col-md-4">
+                {{-- Info Transaksi , Member , Meja  --}}
                 <div class="info">
                     <div class="row">
                         <div class="customer info-item col-md-6">
-                            <a href="" class="btn btn-block btn-flat btn-secondary" data-toggle="modal" data-target="#member"><i class="fa fa-user"></i> <span id="customer"> Customer</span></a>
+                            <a href="" class="btn btn-block btn-flat btn-secondary" data-toggle="modal" data-target="#modal-member"><i class="fa fa-user"></i> Customer</a>
                         </div>
                         <div class="meja info-item  col-md-6">
-                            <a href="" class="btn btn-block btn-flat btn-secondary"><i class="fa fa-bullseye"></i> <span id="customer"> </i> Meja</a>
+                            <a href="" class="btn btn-block btn-flat btn-secondary" data-toggle="modal" data-target="#modal-meja"><i class="fa fa-bullseye"></i> Meja</a>
                         </div>
                     </div>
-                    <h3>Agus Setiawan : M0001</h3>
+                    <h3><span id="nm_member">Member</span> : <span id="meja">Number of Table</span></h3>
+                    <input type="hidden" name="id_member" id="id_member" value="">
+                    <input type="hidden" name="id_meja" id="id_meja" value="">
                 </div>
+                {{-- End Info Transaksi --}}
+                {{-- Detail Menu yang di beli --}}
                 <div class="detail">
                     <div class="detail-item">
                         <div class="row">
@@ -95,6 +103,8 @@
                         </div>
                     </div>                                                            
                 </div>
+                {{-- End Detail --}}
+                {{-- Info Bayar --}}
                 <div class="charge">
                     <div class="other">
                         <div class="other-item">
@@ -130,7 +140,98 @@
                     </div>
                     <h2 id="amount">Rp 12.750.000</h2>
                 </div>
+                {{-- End Info Bayar --}}
             </div>
         </div>
-    </div>
+
+        {{-- Modal Data Member --}}
+        <div class="modal fade" id="modal-member">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">Data Member</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover data">
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>                
+                        @foreach($members as $rsMember)
+                                <tr>
+                                    <td>{{ $rsMember["kd_member"] }}</td>
+                                    <td>{{ $rsMember["nm_member"] }}</td>
+                                    <td>
+                                        {{ $rsMember["alamat"]." ".$rsMember["kota"] }}
+                                        <br/>
+                                        Telp : {{ $rsMember["telp"] }}
+                                    </td>                        
+                                    <td>{{ $rsMember["status"]==1 ? "Aktif" : "Non Aktif" }}</td>
+                                    <td>
+                                        <button class="btn btn-primary" onclick="pilih_member('{{ $rsMember["id_member"] }}','{{ $rsMember["nm_member"] }}')">PILIH</button>
+                                    </td>
+                                </tr>
+                        @endforeach  
+                        </tbody>
+                    </table>              
+                </div>
+            </div>
+            <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>  
+        {{-- End Modal Data Member --}}      
+
+        {{-- Modal Data Member --}}
+        <div class="modal fade" id="modal-meja">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">Data Meja</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover data">
+                        <thead>
+                            <tr>
+                                <th>No Meja</th>
+                                <th>Kapasitas</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>                
+                        @foreach($meja as $rsMeja)
+                                <tr>
+                                    <td>{{ $rsMeja["no_meja"] }}</td>
+                                    <td>{{ $rsMeja["kapasitas"] }}</td>                  
+                                    <td>{{ $rsMeja["status"]==1 ? "Kosong" : "Terisi" }}</td>
+                                    <td>
+                                        <button class="btn btn-primary" onclick="pilih_meja('{{ $rsMeja["id_meja"] }}','{{ $rsMeja["no_meja"] }}')">PILIH</button>
+                                    </td>
+                                </tr>
+                        @endforeach  
+                        </tbody>
+                    </table>              
+                </div>
+            </div>
+            <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>  
+        {{-- End Modal Data Member --}}    
+
+    {{-- Close Div Transaksi  --}}
+    </div>          
 @endsection
