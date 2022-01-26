@@ -100,3 +100,50 @@ function pilih_meja(id_member, nama) {
     // Menyembunyikan Modal Member
     $("#modal-meja").modal("hide");
 }
+
+// Pilih Menu / Add Menu
+function add_menu(id_menu, nm_menu, harga) {
+    // Clone menu item
+    var item = $("#tmp-menu").clone();
+
+    // Set Informasi Menu
+    item.attr("id", id_menu); // Mengganti nilai attribute id dari tmp-menu menjadi id_menu ( 1 )
+    item.find(".delete").attr("data-id", id_menu);
+    item.removeAttr("style"); // Menghilangkan attribute style , display: none
+    item.find(".item").find("h4").html(nm_menu);
+    item.find(".price").find("h4").html('<span>Rp</span> ' + harga);
+    item.find(".jumlah").attr("data-harga", harga); // Set Harga pada attribute data-harga
+
+    // Tambahkan ke detail
+    if ($("#" + id_menu).length == 0) {
+        // Jika Belum ada
+        item.appendTo(".detail");
+    } else {
+        // Jika sudah ada , jumlah bertambah
+        var jumlah = parseInt($("#" + id_menu).find(".jumlah").val()) + 1;
+        var subtotal = harga * jumlah;
+        $("#" + id_menu).find(".jumlah").val(jumlah);
+        // Ganti Harga
+        $("#" + id_menu).find(".price").find("h4").html('<span>Rp</span> ' + subtotal);
+    }
+
+    // Set Trigger Tombol Hapus
+    // $(".delete").click(function () {
+    //     var id = "#" + $(this).attr("data-id"); // example : #1
+    //     $(id).remove();
+    // });
+}
+
+// Remove Menu from Detail
+function del_menu(e) {
+    var id = "#" + $(e).attr("data-id"); // example : #1
+    $(id).remove();
+}
+
+//  Change Price Item
+function ganti_harga(e) {
+    var jumlah = parseInt($(e).val());
+    var harga = parseInt($(e).attr("data-harga"));
+    var subtotal = harga * jumlah;
+    $(e).parent().parent().parent().find(".price").find("h4").html('<span>Rp</span> ' + subtotal);
+}

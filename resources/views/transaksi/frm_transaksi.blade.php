@@ -25,7 +25,7 @@
                 <div class="menu-list">
                     <div class="row">                    
                     @foreach ($menus as $rsMenu)
-                        <div class="menu-item col-md-3">
+                        <div class="menu-item col-md-3" onclick="add_menu('{{ $rsMenu->id_menu }}','{{ $rsMenu->nm_menu }}','{{ $rsMenu->harga }}')">
                             <div class="inner">
                                 @if($rsMenu["foto"]!="")
                                     <img class="avatar" src="{{ $rsMenu["foto"] }}" alt="">
@@ -58,50 +58,7 @@
                 {{-- End Info Transaksi --}}
                 {{-- Detail Menu yang di beli --}}
                 <div class="detail">
-                    <div class="detail-item">
-                        <div class="row">
-                            <div class="item col-md-7">
-                                <h4>Nasi Goreng</h4>
-                                <p>Items :<input type="number" min="1" value="1"></p>
-                            </div>
-                            <div class="price col-md-5">
-                                <h4><span>Rp</span> 7.000</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="row">
-                            <div class="item col-md-7">
-                                <h4>Nasi Goreng</h4>
-                                <p>Items :<input type="number" min="1" value="1"></p>
-                            </div>
-                            <div class="price col-md-5">
-                                <h4><span>Rp</span> 75.000</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="row">
-                            <div class="item col-md-7">
-                                <h4>Nasi Goreng</h4>
-                                <p>Items :<input type="number" min="1" value="1"></p>
-                            </div>
-                            <div class="price col-md-5">
-                                <h4><span>Rp</span> 10.750.000</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="row">
-                            <div class="item col-md-7">
-                                <h4>Nasi Goreng</h4>
-                                <p>Items :<input type="number" min="1" value="1"></p>
-                            </div>
-                            <div class="price col-md-5">
-                                <h4><span>Rp</span> 75.000</h4>
-                            </div>
-                        </div>
-                    </div>                                                            
+                    {{-- Menu yang di pilih --}}
                 </div>
                 {{-- End Detail --}}
                 {{-- Info Bayar --}}
@@ -233,5 +190,21 @@
         {{-- End Modal Data Member --}}    
 
     {{-- Close Div Transaksi  --}}
-    </div>          
+    </div>     
+    
+    {{-- Template Menu --}}
+    <div id="tmp-menu" class="detail-item" style="display: none">
+        <div class="row">
+            <div class="item col-md-7">
+                <h4>Nasi Goreng</h4>
+                <p>Items :<input class="jumlah" onchange="ganti_harga(this)" type="number" min="1" value="1" data-harga=""></p>
+            </div>
+            <div class="price col-md-5">
+                <h4><span>Rp</span> 7.000</h4>
+                <a href="javascript:void(0)" class="delete" onclick="del_menu(this)" data-id=""><i class="fas fa-times"></i></a>
+            </div>
+        </div>
+    </div> 
+    {{-- End Template Menu --}}
+
 @endsection
