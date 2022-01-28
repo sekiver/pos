@@ -87,6 +87,11 @@ function closeFullscreen() {
 function pilih_member(id_member, nama) {
     $("#nm_member").html(nama);
     $("#id_member").val(id_member);
+    $("#diskon").html('<span>Rp</span> ' + number_format(15000));
+    $("#txtDiskon").val(15000);
+
+    // Hitung Ulang Grand TOtal
+    grandtotal();
 
     // Menyembunyikan Modal Member
     $("#modal-member").modal("hide");
@@ -111,8 +116,13 @@ function add_menu(id_menu, nm_menu, harga) {
     item.find(".delete").attr("data-id", id_menu);
     item.removeAttr("style"); // Menghilangkan attribute style , display: none
     item.find(".item").find("h4").html(nm_menu);
-    item.find(".price").find("h4").html('<span>Rp</span> ' + harga);
+    item.find(".price").find("h4").html('<span>Rp</span> ' + number_format(harga));
     item.find(".jumlah").attr("data-harga", harga); // Set Harga pada attribute data-harga
+
+    // Set Value Input
+    item.find(".txtID").val(id_menu);
+    item.find(".txtNama").val(nm_menu);
+    item.find(".txtHarga").val(harga);
 
     // Tambahkan ke detail
     if ($("#" + id_menu).length == 0) {
@@ -124,8 +134,11 @@ function add_menu(id_menu, nm_menu, harga) {
         var subtotal = harga * jumlah;
         $("#" + id_menu).find(".jumlah").val(jumlah);
         // Ganti Harga
-        $("#" + id_menu).find(".price").find("h4").html('<span>Rp</span> ' + subtotal);
+        $("#" + id_menu).find(".price").find("h4").html('<span>Rp</span> ' + number_format(subtotal));
     }
+
+    // Hitung Ulang Grand TOtal
+    grandtotal();
 
     // Set Trigger Tombol Hapus
     // $(".delete").click(function () {
@@ -138,6 +151,9 @@ function add_menu(id_menu, nm_menu, harga) {
 function del_menu(e) {
     var id = "#" + $(e).attr("data-id"); // example : #1
     $(id).remove();
+
+    // Hitung Ulang Grand TOtal
+    grandtotal();
 }
 
 //  Change Price Item
@@ -145,5 +161,38 @@ function ganti_harga(e) {
     var jumlah = parseInt($(e).val());
     var harga = parseInt($(e).attr("data-harga"));
     var subtotal = harga * jumlah;
-    $(e).parent().parent().parent().find(".price").find("h4").html('<span>Rp</span> ' + subtotal);
+    $(e).parent().parent().parent().find(".price").find("h4").html('<span>Rp</span> ' + number_format(subtotal));
+
+    // Hitung Ulang Grand TOtal
+    grandtotal();
+}
+
+// Hitung Grand Total
+function grandtotal() {
+    var total = 0;
+    var ppn = 0;
+    $(".detail > .detail-item").each(function (e) {
+        var harga = parseInt($(this).find(".jumlah").attr("data-harga"));
+        var jumlah = parseInt($(this).find(".jumlah").val());
+        total += harga * jumlah;
+    });
+
+    // Hitung Total setelah dapat Diskon
+    total = total - parseInt($("#txtDiskon").val());
+
+    // PPN 10%
+    ppn = (10 / 100) * total;
+    $("#ppn").html('<span>Rp</span>' + number_format(ppn));
+    $("#txtPPN").val(ppn);
+
+    // Total Setelah PPN
+    total = total + ppn;
+
+    // Set Grand TOtal
+    $("#amount").html(number_format(total));
+}
+
+// Format Number pakai .
+function number_format(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }

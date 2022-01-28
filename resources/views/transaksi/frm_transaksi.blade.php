@@ -70,7 +70,8 @@
                                     <p><strong>Discount</strong></p>
                                 </div>
                                 <div class="price col-md-5">
-                                    <p><span>Rp</span> 15.000</p>
+                                    <p id="diskon"><span>Rp</span> 0</p>
+                                    <input type="hidden" name="diskon" id="txtDiskon" value="0">
                                 </div>
                             </div>
                         </div>
@@ -80,7 +81,8 @@
                                     <p><strong>PPN 10%</strong></p>
                                 </div>
                                 <div class="price col-md-5">
-                                    <p><span>Rp</span> 10.000</p>
+                                    <p id="ppn"><span>Rp</span> 0</p>
+                                    <input type="hidden" name="ppn" id="txtPPN" value="0">
                                 </div>
                             </div>
                         </div>                                                              
@@ -197,7 +199,10 @@
         <div class="row">
             <div class="item col-md-7">
                 <h4>Nasi Goreng</h4>
-                <p>Items :<input class="jumlah" onchange="ganti_harga(this)" type="number" min="1" value="1" data-harga=""></p>
+                <p>Items :<input class="jumlah" name="jumlah[]" onchange="ganti_harga(this)" type="number" min="1" value="1" data-harga=""></p>
+                <input type="hidden" name="id_menu[]" class="txtID">
+                <input type="hidden" name="nm_menu[]" class="txtNama">
+                <input type="hidden" name="harga[]" class="txtHarga">
             </div>
             <div class="price col-md-5">
                 <h4><span>Rp</span> 7.000</h4>
