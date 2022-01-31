@@ -5,6 +5,8 @@
 
 @section('content')
     <div id="transaksi">
+        {{-- Loading --}}
+        <div id="loading"></div>
         <div class="row">
             <div class="menu col-md-8">
                 {{-- Menu Navigation --}}
@@ -41,65 +43,68 @@
                 {{-- End List Menu --}}
             </div>
             <div class="transaksi col-md-4">
-                {{-- Info Transaksi , Member , Meja  --}}
-                <div class="info">
-                    <div class="row">
-                        <div class="customer info-item col-md-6">
-                            <a href="" class="btn btn-block btn-flat btn-secondary" data-toggle="modal" data-target="#modal-member"><i class="fa fa-user"></i> Customer</a>
-                        </div>
-                        <div class="meja info-item  col-md-6">
-                            <a href="" class="btn btn-block btn-flat btn-secondary" data-toggle="modal" data-target="#modal-meja"><i class="fa fa-bullseye"></i> Meja</a>
-                        </div>
-                    </div>
-                    <h3><span id="nm_member">Member</span> : <span id="meja">Number of Table</span></h3>
-                    <input type="hidden" name="id_member" id="id_member" value="">
-                    <input type="hidden" name="id_meja" id="id_meja" value="">
-                </div>
-                {{-- End Info Transaksi --}}
-                {{-- Detail Menu yang di beli --}}
-                <div class="detail">
-                    {{-- Menu yang di pilih --}}
-                </div>
-                {{-- End Detail --}}
-                {{-- Info Bayar --}}
-                <div class="charge">
-                    <div class="other">
-                        <div class="other-item">
-                            <div class="row">
-                                <div class="item col-md-7">
-                                    <p><strong>Discount</strong></p>
-                                </div>
-                                <div class="price col-md-5">
-                                    <p id="diskon"><span>Rp</span> 0</p>
-                                    <input type="hidden" name="diskon" id="txtDiskon" value="0">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="other-item">
-                            <div class="row">
-                                <div class="item col-md-7">
-                                    <p><strong>PPN 10%</strong></p>
-                                </div>
-                                <div class="price col-md-5">
-                                    <p id="ppn"><span>Rp</span> 0</p>
-                                    <input type="hidden" name="ppn" id="txtPPN" value="0">
-                                </div>
-                            </div>
-                        </div>                                                              
-                    </div>
-                    <div class="nav-button">
+                <form id="frmTransaksi" action="{{ url('transaksi/save') }}" method="POST">
+                    @csrf
+                    {{-- Info Transaksi , Member , Meja  --}}
+                    <div class="info">
                         <div class="row">
-                            <div class="nav-item col-md-6">
-                                <a href="" class="btn btn-block btn-flat btn-info">SAVE BILL</a>          
+                            <div class="customer info-item col-md-6">
+                                <a href="" class="btn btn-block btn-flat btn-secondary" data-toggle="modal" data-target="#modal-member"><i class="fa fa-user"></i> Customer</a>
                             </div>
-                            <div class="nav-item col-md-6">
-                                <a href="" class="btn btn-block btn-flat btn-info">PRINT BILL</a> 
-                            </div>                            
+                            <div class="meja info-item  col-md-6">
+                                <a href="" class="btn btn-block btn-flat btn-secondary" data-toggle="modal" data-target="#modal-meja"><i class="fa fa-bullseye"></i> Meja</a>
+                            </div>
                         </div>
+                        <h3><span id="nm_member">Member</span> : <span id="meja">Number of Table</span></h3>
+                        <input type="hidden" name="id_member" id="id_member" value="">
+                        <input type="hidden" name="id_meja" id="id_meja" value="">
                     </div>
-                    <h2 id="amount">Rp 12.750.000</h2>
-                </div>
-                {{-- End Info Bayar --}}
+                    {{-- End Info Transaksi --}}
+                    {{-- Detail Menu yang di beli --}}
+                    <div class="detail">
+                        {{-- Menu yang di pilih --}}
+                    </div>
+                    {{-- End Detail --}}
+                    {{-- Info Bayar --}}
+                    <div class="charge">
+                        <div class="other">
+                            <div class="other-item">
+                                <div class="row">
+                                    <div class="item col-md-7">
+                                        <p><strong>Discount</strong></p>
+                                    </div>
+                                    <div class="price col-md-5">
+                                        <p id="diskon"><span>Rp</span> 0</p>
+                                        <input type="hidden" name="diskon" id="txtDiskon" value="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="other-item">
+                                <div class="row">
+                                    <div class="item col-md-7">
+                                        <p><strong>PPN 10%</strong></p>
+                                    </div>
+                                    <div class="price col-md-5">
+                                        <p id="ppn"><span>Rp</span> 0</p>
+                                        <input type="hidden" name="ppn" id="txtPPN" value="0">
+                                    </div>
+                                </div>
+                            </div>                                                              
+                        </div>
+                        <div class="nav-button">
+                            <div class="row">
+                                <div class="nav-item col-md-6">
+                                    <a href="javascript:void(0)" class="btn btn-block btn-flat btn-info" onclick="save_transaksi()">SAVE BILL</a>          
+                                </div>
+                                <div class="nav-item col-md-6">
+                                    <a href="" class="btn btn-block btn-flat btn-info">PRINT BILL</a> 
+                                </div>                            
+                            </div>
+                        </div>
+                        <h2 id="amount">Rp 12.750.000</h2>
+                    </div>
+                    {{-- End Info Bayar --}}
+                </form>
             </div>
         </div>
 

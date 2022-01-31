@@ -196,3 +196,29 @@ function grandtotal() {
 function number_format(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
+// Save Bill / Transaksi
+function save_transaksi() {
+    // Validasi
+    if ($("#id_meja").val() == "") { showMessage("error", "Maaf Meja Belum dipilih !!!"); return; }
+    if ($(".detail .detail-item").length == 0) { showMessage("error", "Maaf Menu Belum dipilih !!!"); return; }
+
+    // Save
+    $.ajax({
+        url: $("#frmTransaksi").attr('action'),
+        dataType: 'json',
+        data: $("#frmTransaksi").serialize(),
+        method: "POST",
+        beforeSend: function () {
+            $("#loading").fadeIn();
+        },
+        success: function (data) {
+            console.log(data);
+            $("#loading").hide();
+        },
+        error: function (data) {
+            console.log(data);
+            $("#loading").hide();
+        }
+    });
+}
