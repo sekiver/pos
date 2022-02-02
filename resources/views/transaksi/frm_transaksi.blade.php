@@ -94,10 +94,11 @@
                         <div class="nav-button">
                             <div class="row">
                                 <div class="nav-item col-md-6">
-                                    <a href="javascript:void(0)" class="btn btn-block btn-flat btn-info" onclick="save_transaksi()">SAVE BILL</a>          
+                                    <a id="btn-save" href="javascript:void(0)" class="btn btn-block btn-flat btn-info" onclick="save_transaksi()">SAVE BILL</a>          
+                                    <a id="btn-new" href="javascript:void(0)" class="btn btn-block btn-flat btn-info d-none" onclick="new_transaksi()">NEW TRANSAKSI</a>          
                                 </div>
                                 <div class="nav-item col-md-6">
-                                    <a href="" class="btn btn-block btn-flat btn-info">PRINT BILL</a> 
+                                    <a id="btn-print" href="javascript:void(0)" data-url="{{ url("transaksi/nota") }}" class="btn btn-block btn-flat btn-info">PRINT BILL</a> 
                                 </div>                            
                             </div>
                         </div>
@@ -216,5 +217,8 @@
         </div>
     </div> 
     {{-- End Template Menu --}}
+
+    {{-- Load Nota --}}
+    <iframe src="" frameborder="0" id="nota" class="d-none"></iframe>
 
 @endsection

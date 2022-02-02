@@ -44,5 +44,6 @@ Route::get('/transaksi',[TransaksiCtrl::class,'index']);
 Route::get('/transaksi/form',[TransaksiCtrl::class,'form']);
 Route::post('/transaksi/save',[TransaksiCtrl::class,'save']);
 Route::get('/transaksi/delete/{id}',[TransaksiCtrl::class,'delete']);
+Route::get('/transaksi/nota/{id}',[TransaksiCtrl::class,'generate_nota']);
 
 

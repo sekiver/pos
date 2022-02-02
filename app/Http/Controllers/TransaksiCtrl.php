@@ -64,8 +64,36 @@ class TransaksiCtrl extends Controller
             ]);
         }
 
-        
+        return json_encode(["error"=>0,"type"=>"success","message"=>"Data Berhasil disimpan !!","id_transaksi"=>$id_transaksi]);
     }
+
+    function generate_nota(Request $req){
+
+        // Generate Data using Query Builder
+        $transaksi = DB::table("tb_transaksi")
+        ->join("users","tb_transaksi.id_kasir","=","users.id")
+        ->join("tb_member","tb_transaksi.id_member","=","tb_member.id_member")
+        ->join("tb_meja","tb_transaksi.id_meja","=","tb_meja.id_meja")
+        ->select("tb_transaksi.*","users.name","tb_member.nm_member","tb_meja.no_meja")
+        ->where("tb_transaksi.id_transaksi",$req->id)
+        ->first();
+
+        $detail = DB::table("tb_detail_transaksi")
+        ->join("tb_menu","tb_detail_transaksi.id_menu","=","tb_menu.id_menu")
+        ->select("tb_detail_transaksi.*","tb_menu.nm_menu",DB::raw("(tb_detail_transaksi.harga * tb_detail_transaksi.jumlah) as subtotal"))
+        ->where("tb_detail_transaksi.id_transaksi",$req->id)
+        ->get();
+
+        // Data Store to View
+        $data = [
+            "rsTransaksi" => $transaksi,
+            "rsDetail" => $detail,
+            "total" => 0
+        ];
+
+        return view("transaksi.nota",$data);
+    }
+
 }
 
 

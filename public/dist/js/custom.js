@@ -41,7 +41,20 @@ function setImage(input, target) {
 }
 
 // Alert Toast
-function showMessage(type, mess) {
+function showMessage(type, mess, target = "body") {
+
+    // Options
+    toastr.options = {
+        "positionClass": "toast-bottom-full-width",
+        "showDuration": "1000",
+        "hideDuration": "1000",
+        "timeOut": "1000",
+        "extendedTimeOut": "1000",
+    };
+
+    // Target Agar bisa tampil pada tampilan full screen
+    toastr.options.target = target;
+
     switch (type) {
         case "success":
             toastr.success(mess);
@@ -200,8 +213,8 @@ function number_format(x) {
 // Save Bill / Transaksi
 function save_transaksi() {
     // Validasi
-    if ($("#id_meja").val() == "") { showMessage("error", "Maaf Meja Belum dipilih !!!"); return; }
-    if ($(".detail .detail-item").length == 0) { showMessage("error", "Maaf Menu Belum dipilih !!!"); return; }
+    if ($("#id_meja").val() == "") { showMessage("error", "Maaf Meja Belum dipilih !!!","#transaksi"); return; }
+    if ($(".detail .detail-item").length == 0) { showMessage("error", "Maaf Menu Belum dipilih !!!","#transaksi"); return; }
 
     // Save
     $.ajax({
@@ -215,10 +228,44 @@ function save_transaksi() {
         success: function (data) {
             console.log(data);
             $("#loading").hide();
+
+            if(data.error==0){
+                // Proses Jika berhasil disimpan
+                showMessage(data.type,data.message,"#transaksi");
+
+                // Cetak nota
+                var url = $("#btn-print").attr("data-url")+"/"+data.id_transaksi;
+                $("#nota").attr("src",url);
+
+                // Sembunyikan Save
+                $("#btn-save").addClass("d-none");
+                $("#btn-new").removeClass("d-none");
+            }
         },
         error: function (data) {
             console.log(data);
             $("#loading").hide();
         }
     });
+}
+
+// Reset
+function new_transaksi(){
+    // Bersihkan View
+    $(".detail .detail-item").remove();
+    $("#nm_member").html("MEMBER");
+    $("#meja").html("NO MEJA");
+    $("#diskon").html("<span>Rp</span> 0");
+    $("#ppn").html("<span>Rp</span> 0");
+    $("#amount").html(0);
+
+    // Bersihkan Input
+    $("#id_member").val(1);
+    $("#id_meja").val("");
+    $("#txtDiskon").val(0);
+    $("#txtPPN").val(0);
+
+    // Tombol dikembalikan
+    $("#btn-save").removeClass("d-none");
+    $("#btn-new").addClass("d-none");
 }
