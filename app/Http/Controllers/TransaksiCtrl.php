@@ -15,6 +15,34 @@ use App\Models\DetailTransaksi;
 class TransaksiCtrl extends Controller
 {
     //
+    function index(){
+
+        // Query Data Transaksi SQL di Grantotal
+        /* $transaksi = DB::select("SELECT t.*,u.name,mb.nm_member,mj.no_meja,
+        (SELECT SUM(dt.harga*dt.jumlah) AS subtotal FROM tb_detail_transaksi AS dt 
+        WHERE dt.id_transaksi = t.id_transaksi) AS gtotal
+        FROM tb_transaksi AS t
+        INNER JOIN users AS u ON t.id_kasir = u.id
+        INNER JOIN tb_member AS mb ON t.id_member = mb.id_member
+        INNER JOIN tb_meja AS mj ON t.id_meja = mj.id_meja"); */
+
+        // Tanpa SQL Grantotal
+        $transaksi = DB::select("SELECT t.*,u.name,mb.nm_member,mj.no_meja 
+        FROM tb_transaksi AS t
+        INNER JOIN users AS u ON t.id_kasir = u.id
+        INNER JOIN tb_member AS mb ON t.id_member = mb.id_member
+        INNER JOIN tb_meja AS mj ON t.id_meja = mj.id_meja");
+        
+        // Data Page
+        $data = [
+            "title" => "Transaksi",
+            "page_title" => "Transaksi",
+            "transaksi" => $transaksi
+        ];
+
+        return view("transaksi.data_transaksi",$data);
+    }
+
     function form(){   
         // Data Page
         $data = [
@@ -47,6 +75,7 @@ class TransaksiCtrl extends Controller
             "id_meja"   => $req->input("id_meja"),
             "ppn"       => $req->input("ppn"),
             "diskon"    => $req->input("diskon"),
+            "gtotal"    => $req->input("gtotal"),
             "status"    => 1,
         ]);
 
@@ -94,6 +123,18 @@ class TransaksiCtrl extends Controller
         return view("transaksi.nota",$data);
     }
 
+    // Hapus
+    function delete(Request $req){
+        try {
+            Transaksi::where("id_transaksi",$req->id)->delete();
+            DetailTransaksi::where("id_transaksi",$req->id)->delete();
+            $mess = ["type"=>"success","text"=>"Data Berhasil dihapus !!"];
+        } catch(Exception $err){
+            $mess = ["type"=>"error","text"=>"Data Gagal dihapus !!"];
+        }
+        // Redirect
+        return redirect('member')->with($mess);
+    }
 }
 
 

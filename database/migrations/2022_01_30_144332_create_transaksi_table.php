@@ -22,6 +22,7 @@ class CreateTransaksiTable extends Migration
             $table->string('id_meja');
             $table->integer('ppn');
             $table->integer('diskon');
+            $table->integer('gtotal');
             $table->integer('status');
             $table->timestamps();
         });

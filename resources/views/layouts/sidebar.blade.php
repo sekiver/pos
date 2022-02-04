@@ -88,9 +88,24 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
-                Transaksi               
+                Transaksi
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('transaksi') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Transaksi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('transaksi/form') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add New</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-header">SETTINGS</li>
           <li class="nav-item">

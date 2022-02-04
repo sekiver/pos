@@ -203,6 +203,7 @@ function grandtotal() {
 
     // Set Grand TOtal
     $("#amount").html(number_format(total));
+    $("#gtotal").val(total);
 }
 
 // Format Number pakai .
@@ -213,8 +214,8 @@ function number_format(x) {
 // Save Bill / Transaksi
 function save_transaksi() {
     // Validasi
-    if ($("#id_meja").val() == "") { showMessage("error", "Maaf Meja Belum dipilih !!!","#transaksi"); return; }
-    if ($(".detail .detail-item").length == 0) { showMessage("error", "Maaf Menu Belum dipilih !!!","#transaksi"); return; }
+    if ($("#id_meja").val() == "") { showMessage("error", "Maaf Meja Belum dipilih !!!", "#transaksi"); return; }
+    if ($(".detail .detail-item").length == 0) { showMessage("error", "Maaf Menu Belum dipilih !!!", "#transaksi"); return; }
 
     // Save
     $.ajax({
@@ -229,13 +230,13 @@ function save_transaksi() {
             console.log(data);
             $("#loading").hide();
 
-            if(data.error==0){
+            if (data.error == 0) {
                 // Proses Jika berhasil disimpan
-                showMessage(data.type,data.message,"#transaksi");
+                showMessage(data.type, data.message, "#transaksi");
 
                 // Cetak nota
-                var url = $("#btn-print").attr("data-url")+"/"+data.id_transaksi;
-                $("#nota").attr("src",url);
+                var url = $("#btn-print").attr("data-url") + "/" + data.id_transaksi;
+                $("#nota").attr("src", url);
 
                 // Sembunyikan Save
                 $("#btn-save").addClass("d-none");
@@ -250,7 +251,7 @@ function save_transaksi() {
 }
 
 // Reset
-function new_transaksi(){
+function new_transaksi() {
     // Bersihkan View
     $(".detail .detail-item").remove();
     $("#nm_member").html("MEMBER");

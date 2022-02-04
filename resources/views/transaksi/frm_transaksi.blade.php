@@ -103,6 +103,7 @@
                             </div>
                         </div>
                         <h2 id="amount">Rp 12.750.000</h2>
+                        <input type="hidden" id="gtotal" name="gtotal">
                     </div>
                     {{-- End Info Bayar --}}
                 </form>
