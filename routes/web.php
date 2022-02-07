@@ -5,6 +5,7 @@ use App\Http\Controllers\MenuCtrl;
 use App\Http\Controllers\MemberCtrl;
 use App\Http\Controllers\UserCtrl;
 use App\Http\Controllers\TransaksiCtrl;
+use App\Http\Controllers\ReportCtrl;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +47,5 @@ Route::post('/transaksi/save',[TransaksiCtrl::class,'save']);
 Route::get('/transaksi/delete/{id}',[TransaksiCtrl::class,'delete']);
 Route::get('/transaksi/nota/{id}',[TransaksiCtrl::class,'generate_nota']);
 
-
+// Laporan
+Route::get('/report/transaksi',[ReportCtrl::class,'rpt_transaksi']);
