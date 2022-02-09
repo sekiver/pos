@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardCtrl;
 use App\Http\Controllers\MenuCtrl;
 use App\Http\Controllers\MemberCtrl;
 use App\Http\Controllers\UserCtrl;
@@ -18,9 +19,7 @@ use App\Http\Controllers\ReportCtrl;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/',[DashboardCtrl::class,'index']);
 
 // Menu
 Route::get('/menu',[MenuCtrl::class,'index']);
@@ -48,4 +47,8 @@ Route::get('/transaksi/delete/{id}',[TransaksiCtrl::class,'delete']);
 Route::get('/transaksi/nota/{id}',[TransaksiCtrl::class,'generate_nota']);
 
 // Laporan
-Route::get('/report/transaksi',[ReportCtrl::class,'rpt_transaksi']);
+Route::get('/report/transaksi',[ReportCtrl::class,'index']);
+Route::post('/report/cetak/transaksi',[ReportCtrl::class,'rpt_transaksi']);
+Route::post('/report/cetak/trmember',[ReportCtrl::class,'rpt_transaksi_member']);
+Route::get('/report/cetak/menu',[ReportCtrl::class,'rpt_menu']);
+Route::get('/report/cetak/member',[ReportCtrl::class,'rpt_member']);

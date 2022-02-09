@@ -131,7 +131,36 @@
               </li>
             </ul>
           </li>  
-          <li class="nav-header">REPORTS</li>        
+          <li class="nav-header">REPORTS</li>    
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-print"></i>
+              <p>
+                Laporan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('report/transaksi') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Report Transaksi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('report/cetak/menu') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Report Menu</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('report/cetak/member') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Report Member</p>
+                </a>
+              </li>
+            </ul>
+          </li>     
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
