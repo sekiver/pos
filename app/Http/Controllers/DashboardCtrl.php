@@ -11,7 +11,13 @@ use App\Models\Transaksi;
 
 class DashboardCtrl extends Controller
 {
-    //
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     function index(){
 
         $data = [

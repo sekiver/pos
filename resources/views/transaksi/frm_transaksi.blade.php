@@ -13,7 +13,7 @@
                 <div class="menu-navigation">
                     <div class="row">
                         <div class="cashier col-md-4">
-                            <h5>Cashier : Eko Santoso</h5>
+                            <h5>Cashier : {{ Auth::user()->name }}</h5>
                         </div>
                         <div class="search col-md-8">
                             <div class="input-group">

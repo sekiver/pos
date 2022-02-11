@@ -6,6 +6,7 @@
 @section('content')
 <div class="row">
     <div class="col-lg-6">
+        {{-- Report Filter Per Tanggal --}}
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Per Tanggal</h3>
@@ -27,8 +28,10 @@
                 </form>
             </div>
         </div>
+        {{-- End Report Filter Per Tanggal --}}
     </div>
     <div class="col-lg-6">
+        {{-- Report Filter Per Member --}}
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Per Member</h3>
@@ -50,7 +53,8 @@
                     </div>
                 </form>
             </div>
-        </div>        
+        </div> 
+        {{-- End Report Filter Per Member --}}       
     </div>
 </div>
 @endsection

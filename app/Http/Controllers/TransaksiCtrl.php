@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Menu;
 use App\Models\Member;
@@ -70,7 +71,7 @@ class TransaksiCtrl extends Controller
         Transaksi::create([
             "nota"      => $nota,
             "tanggal"   => date("Y-m-d h:i:s"),
-            "id_kasir"  => 1,
+            "id_kasir"  => Auth::user()->id,
             "id_member" => $req->input("id_member"),
             "id_meja"   => $req->input("id_meja"),
             "ppn"       => $req->input("ppn"),

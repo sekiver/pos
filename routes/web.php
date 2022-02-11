@@ -52,3 +52,7 @@ Route::post('/report/cetak/transaksi',[ReportCtrl::class,'rpt_transaksi']);
 Route::post('/report/cetak/trmember',[ReportCtrl::class,'rpt_transaksi_member']);
 Route::get('/report/cetak/menu',[ReportCtrl::class,'rpt_menu']);
 Route::get('/report/cetak/member',[ReportCtrl::class,'rpt_member']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
