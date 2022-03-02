@@ -8,8 +8,13 @@ use App\Models\Menu;
 
 class ApiCtrl extends Controller
 {
-    function get_menu(){
-        return response()->json(Menu::All());
+    function get_menu(Request $req){
+        if($req->kategori){
+            $menus = Menu::where("kategori",$req->kategori)->get();
+        } else {
+            $menus = Menu::All();
+        }
+        return response()->json($menus);
     }
 
     function get_menu_favorite(){

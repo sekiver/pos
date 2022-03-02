@@ -15,7 +15,7 @@ use App\Http\Controllers\ApiCtrl;
 |
 */
 
-Route::get("/menu",[ApiCtrl::class,'get_menu']);
+Route::get("/menu/{kategori?}",[ApiCtrl::class,'get_menu']);
 Route::get("/menu_favorite",[ApiCtrl::class,'get_menu_favorite']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
