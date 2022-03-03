@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.blank')
 
 @section("title",$title)
 @section("page_title",$page_title)
@@ -12,10 +12,13 @@
                 {{-- Menu Navigation --}}
                 <div class="menu-navigation">
                     <div class="row">
+                        <div class="col-md-1">
+                            <a href="{{ url('/') }}"><i class="fas fa-home"></i></a>
+                        </div>
                         <div class="cashier col-md-4">
                             <h5>Cashier : {{ Auth::user()->name }}</h5>
                         </div>
-                        <div class="search col-md-8">
+                        <div class="search col-md-7">
                             <div class="input-group">
                                 <input id="search" type="text" class="form-control" placeholder="Search">
                             </div>
