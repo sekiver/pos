@@ -21,11 +21,20 @@ class ApiCtrl extends Controller
         $menus = DB::table("tb_menu")
         ->join("tb_detail_transaksi","tb_detail_transaksi.id_menu","=","tb_menu.id_menu")
         ->selectRaw("tb_menu.*,SUM(tb_detail_transaksi.jumlah) as total")
-        ->groupByRaw("tb_menu.id_menu,tb_menu.kd_menu,tb_menu.nm_menu,tb_menu.harga,tb_menu.kategori,tb_menu.satuan,tb_menu.stok,tb_menu.ket,tb_menu.foto,tb_menu.created_at,tb_menu.updated_at")
+        ->groupByRaw("tb_menu.id_menu,tb_menu.kd_menu,tb_menu.nm_menu,tb_menu.harga,tb_menu.kategori,tb_menu.satuan,tb_menu.stok,tb_menu.ket,tb_menu.foto,tb_menu.fav,tb_menu.created_at,tb_menu.updated_at")
         ->orderByRaw("SUM(tb_detail_transaksi.jumlah) DESC")
         ->limit(5)
         ->get();
 
         return response()->json(collect($menus));
+    }
+
+    function update_menu_favorite(Request $req){
+        Menu::where("id_menu",$req->id)
+        ->update([
+            "fav" => $req->fav
+        ]);
+
+        return response()->json(["error"=>0]);
     }
 }
