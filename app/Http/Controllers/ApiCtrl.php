@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Menu;
+use App\Models\User;
 
 class ApiCtrl extends Controller
 {
@@ -36,5 +38,29 @@ class ApiCtrl extends Controller
         ]);
 
         return response()->json(["error"=>0]);
+    }
+
+    function login(Request $req){
+        // Data JSON from IONIC
+        $login = $req->json()->all();
+
+        // Untuk cek data user berdasarkan email
+        $user = User::where("email",$login["email"])->first();
+
+        if($user){
+            // JIka Ada
+            if(Hash::check($login["password"],$user->password)){
+                // Jika Password benar
+                $mess  = ["error"=>0,"mess"=>"Berhasil Login !","data"=>collect($user)];
+            } else {
+                // Jika Password Salah
+                $mess  = ["error"=>1,"mess"=>"Password Not Match !","data"=>null];
+            }
+        } else {
+            // Jika tidak ditemukan
+            $mess  = ["error"=>1,"mess"=>"Email Not Found !","data"=>null];
+        }
+    
+        return response()->json($mess);
     }
 }
