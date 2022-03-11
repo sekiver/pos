@@ -19,6 +19,7 @@ Route::get("/menu/{kategori?}",[ApiCtrl::class,'get_menu']);
 Route::get("/menu_favorite",[ApiCtrl::class,'get_menu_favorite']);
 Route::get("/favorite/{id}/{fav}",[ApiCtrl::class,'update_menu_favorite']);
 Route::post("/login",[ApiCtrl::class,'login']);
+Route::post("/registrasi",[ApiCtrl::class,'registrasi']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
