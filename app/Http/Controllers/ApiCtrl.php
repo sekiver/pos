@@ -6,8 +6,10 @@ use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use App\Models\Menu;
 use App\Models\User;
+use App\Models\Member;
 
 class ApiCtrl extends Controller
 {
@@ -52,8 +54,10 @@ class ApiCtrl extends Controller
             //if($user->status==1){
                 // JIka Ada
                 if(Hash::check($login["password"],$user->password)){
+                    // Get Member
+                    $member = Member::where("id_member",$user->id_member)->first();
                     // Jika Password benar
-                    $mess  = ["error"=>0,"mess"=>"Berhasil Login !","data"=>collect($user)];
+                    $mess  = ["error"=>0,"mess"=>"Berhasil Login !","data"=>["user"=>collect($user),"member"=>collect($member)]];
                 } else {
                     // Jika Password Salah
                     $mess  = ["error"=>1,"mess"=>"Password Not Match !","data"=>null];
@@ -110,5 +114,50 @@ class ApiCtrl extends Controller
         }
 
         return response()->json($mess);        
+    }
+
+    function member(Request $req){
+        $dtMember = $req->json()->all();   
+        $kode = Str::upper(Str::random(6));
+
+        //  Update Data Member
+        $save = Member::UpdateorCreate(
+            [
+                "id_member" => $dtMember["id_member"]
+            ],
+            [
+                "kd_member"=>$kode,
+                "nm_member"=>$dtMember["nm_member"],
+                "alamat"=>$dtMember["alamat"],
+                "kota"=>$dtMember["kota"],
+                "telp"=>$dtMember["telp"],
+                "jk"=>$dtMember["jk"],  
+                "foto"=>$dtMember["foto"]
+            ]
+        );
+
+        if($save){            
+            // Get Data User and Member
+            $user = User::where("id",$dtMember["user_id"])->first();
+            $member = Member::where("kd_member",$kode)->first();
+
+             // Update id_member ke tabel Users jika member berhasil disimpan !
+            if($dtMember["id_member"]==""){
+                User::where("id",$dtMember["user_id"])->update([
+                    "id_member"=>$member->id_member
+                ]);
+
+            }
+
+            if($dtMember["id_member"]==""){
+                $mess  = ["error"=>0,"mess"=>"Selamat Anda Menjadi Member !","data"=>["user"=>collect($user),"member"=>collect($member)]];
+            } else {
+                $mess  = ["error"=>0,"mess"=>"Data Updated !","data"=>["user"=>collect($user),"member"=>collect($member)]];
+            }
+        } else {
+            $mess  = ["error"=>1,"mess"=>"Oops ! Any something wrong !","data"=>null];
+        }
+
+        return response()->json($mess);
     }
 }
